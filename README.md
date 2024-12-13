@@ -33,3 +33,33 @@ Esta es la parte del frontend del proyecto, construida con Angular. Incluye:
 - **Estilos**:
   - Los estilos para `EstrenosComponent` se encuentran en [cinema_frontend/src/app/estrenos/estrenos.component.css](cinema_frontend/src/app/estrenos/estrenos.component.css).
   - Los estilos globales de la aplicación están en [cinema_frontend/src/styles.css](cinema_frontend/src/styles.css).
+
+### 💻 cinema_proyect
+
+Este es el backend del proyecto, desarrollado con Django. Incluye aplicaciones para:
+
+- **Movies** ([cinema_proyect/movies/models.py](cinema_proyect/movies/models.py)): Gestión de películas.
+  - Modelos principales: `Pelicula`, `Genero`.
+  - Vistas y URLs para listar, crear, editar y eliminar películas.
+  - Serializadores para la API REST.
+
+- **Users** ([cinema_proyect/users/models.py](cinema_proyect/users/models.py)): Registro y autenticación de usuarios.
+  - Modelos principales: `Usuario`.
+  - Vistas y URLs para el registro, login y gestión de perfiles de usuarios.
+  - Serializadores para la API REST.
+
+- **Tickets** ([cinema_proyect/tickets/models.py](cinema_proyect/tickets/models.py)): Manejo de entradas de cine.
+  - Modelos principales: `Ticket`.
+  - Vistas y URLs para la compra y validación de tickets.
+  - Serializadores para la API REST.
+
+- **Halls** ([cinema_proyect/halls/models.py](cinema_proyect/halls/models.py)): Gestión de salas de cine.
+  - Modelos principales: `Sala`.
+  - Vistas y URLs para crear, editar y eliminar salas.
+  - Serializadores para la API REST.
+
+- **Purchases** ([cinema_proyect/purchases/models.py](cinema_proyect/purchases/models.py)): Manejo de compras.
+  - Modelos principales: `Compra`.
+  - Vistas y URLs para la gestión de compras.
+  - Serializadores para la API REST.
+
