@@ -1,0 +1,230 @@
+.container.mt-4{
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.showtime-id {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 15px; /* Espacio entre la información y la sección de asientos */
+    background-color: #ebebeb;
+    margin-right: 0;
+    border-left: #004991 15px solid;
+    border-radius: 20px;
+}
+
+.showtime-info {
+    top: 0;
+    flex: 1;
+    justify-content: right;
+    padding-bottom: 50px;
+}
+
+.showtime-info-text {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.showtime-info-text h1{
+    color: #004991;
+}
+
+.showtime-info img {
+    width: auto;
+    height: 500px;
+    border-radius: 15%; /* Esto hará que la imagen sea circular */
+    display: block; /* Asegura que la imagen se ajuste correctamente */
+    margin: 0 auto; /* Centra la imagen dentro del contenedor */
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.showtime-info p {
+    margin: 10px 0;
+}
+
+.tickets-info{
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.tickets-info p{
+    color: #004991;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.total-price {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.total-price h3 {
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #dc3545; /* Color para el título del total */
+}
+
+.total-amount {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #dc3545; /* Color para el monto total */
+}
+
+.col-md-8 {
+    flex: 2; /* Hace que la columna derecha ocupe más espacio */
+    border-left: #004991 5px solid;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.offer{
+    color:white;
+    font-weight: bold;
+    font-size: 2rem;
+    background-color: #dc3545;
+    text-align: center;
+}
+
+.tickets-section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.tickets-section h3 {
+    margin-top: 20px;
+    color: #004991;
+    font-size: 2rem;
+}
+
+.ticket-type-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ticket-type-list li {
+    margin-bottom: 15px;
+    display: flex; /* Usar flexbox para alinear los elementos */
+    justify-content: space-between; /* Alinear los elementos a los extremos */
+    align-items: center; /* Alinear verticalmente en el centro */
+}
+
+.ticket-type {
+    flex: 1; /* Ocupa el espacio disponible */
+    font-size: 1rem;
+}
+
+.price-container {
+    display: flex; /* Usar flexbox para alinear los precios */
+    flex-direction: column; /* Colocar los precios uno encima del otro */
+    align-items: flex-end; /* Alinear los precios a la derecha */
+}
+
+.price-offer {
+    font-weight: bold;
+    color: #d9534f; /* Color para el precio en oferta */
+    font-size: 1.2rem; /* Tamaño de fuente más grande para el precio en oferta */
+    margin-bottom: 5px; /* Espacio entre el precio en oferta y el original */
+}
+
+.price-original {
+    text-decoration: line-through; /* Tachar el precio original */
+    color: #6c757d; /* Color gris para el precio original */
+    font-size: 1rem; /* Tamaño de fuente más pequeño para el precio original */
+}
+
+.ticket-type-list, .selected-seats-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.ticket-type-list li, .selected-seats-list li {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ticket-type-list span, .selected-seats-list span {
+    font-weight: bold;
+}
+
+.form-select {
+    padding: 5px;
+    margin-left: 10px;
+}
+
+.mb-2 {
+    margin-bottom: 10px;
+}
+
+.button-group {
+    display: flex;
+    gap: 50px; /* Espacio entre los botones */
+}
+
+.button-group .btn {
+    background-color: #f8f9fa; /* Color de fondo para los botones */
+    color: #004991; /* Color del texto para los botones */
+    font-weight: bold;
+    border: 1px solid #004991; /* Color del borde para los botones */
+    border-radius: 30px; /* Bordes redondeados */
+    padding: 10px 20px; /* Espaciado interno */
+    cursor: pointer; /* Cursor de puntero al pasar por encima */
+    text-align: center; /* Centra el texto en el botón */
+    transition: background-color 0.3s, color 0.3s; /* Suaviza el cambio de color */
+}
+
+.button-group .btn:hover {
+    background-color: #004991; /* Color de fondo al pasar por encima */
+    color: white;
+}
+
+.button-group input[type="radio"] {
+    display: none; /* Oculta el botón de radio por defecto */
+}
+
+.button-group .btn.active {
+    background-color: #004991; /* Color de fondo para el botón seleccionado */
+    color: white; /* Color del texto para el botón seleccionado */
+    border-color: #004991; /* Color del borde para el botón seleccionado */
+}
+
+.btn{
+    background-color: rgb(0, 157, 0);
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn:hover {
+    background-color: rgb(0, 105, 0); /* Color de fondo del botón en hover */
+}

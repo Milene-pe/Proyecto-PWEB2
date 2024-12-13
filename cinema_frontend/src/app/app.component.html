@@ -1,0 +1,6 @@
+<app-navbar *ngIf="!isSeatsPage"></app-navbar>
+<app-purchase-navbar *ngIf="isSeatsPage"></app-purchase-navbar>
+
+<router-outlet></router-outlet> <!-- Área para la carga de las vistas asociadas a las rutas -->
+
+<app-card></app-card> <!-- Pie de página -->

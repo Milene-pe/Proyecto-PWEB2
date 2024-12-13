@@ -1,0 +1,86 @@
+<div class="container mt-4" *ngIf="showtime && selectedSeats.length">
+    <div class="content-wrapper row">
+        <!-- Información del Showtime -->
+        <p class="showtime-id"><strong>Showtime ID: {{ showtime.id }} - Purchase ID: {{ purchase.id }}</strong> </p> 
+        <div class="col-md-4 showtime-info" *ngIf="movie">
+            <img [src]="movie.poster" class="img-fluid" alt="{{ movie.title }}">
+            <div class="showtime-info-text">
+                <h1><strong>{{ movie.title }}</strong> </h1>
+                <h2><strong>Sala  {{ showtime.hall }}</strong> </h2>
+                <p><strong>{{ showtime.show_date | date:'EEEE, d MMMM' }}</strong> </p>
+                <p><strong>Hora: {{ formatTime(showtime.show_time) }}</strong> </p>
+                <p><strong>Duración:</strong> {{ formatDuration(movie.duration_mins) }}</p>
+            </div>
+
+            <div class="tickets-info col-md-4">
+                <p><strong>Tickets: {{ selectedSeats.length }}</strong> </p>
+            </div>
+
+            <div class="total-price">
+                <h3>Total:</h3>
+                <p class="total-amount">S/. {{ totalAmount | number:'1.2-2' }}</p>
+            </div>
+        </div>
+
+        <!-- Columna derecha con el escenario y los asientos -->
+        <div class="col-md-8">
+            <div class="tickets-section">
+
+                <div class="offer" *ngIf="showtime.is_offer">
+                    <span>¡OFERTA!</span>
+                </div>
+
+                <h3>Precios</h3>
+                <ul class="ticket-type-list">
+                    <li>
+                        <span class="ticket-type">Entrada General:</span>
+                        <div class="price-container">
+                            <span class="price-original" *ngIf="showtime.is_offer">S/. {{ getFormattedPrice(showtime.price_general, 10) }}</span>
+                            <span class="price-offer">S/. {{ showtime.price_general | number:'1.2-2' }}</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="ticket-type">Entrada para Niños:</span>
+                        <div class="price-container">
+                            <span class="price-original" *ngIf="showtime.is_offer">S/. {{ getFormattedPrice(showtime.price_kids, 10) }}</span>
+                            <span class="price-offer">S/. {{ showtime.price_kids | number:'1.2-2' }}</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="ticket-type">Entrada para Adultos Mayores:</span>
+                        <div class="price-container">
+                            <span class="price-original" *ngIf="showtime.is_offer">S/. {{ getFormattedPrice(showtime.price_seniors, 10) }}</span>
+                            <span class="price-offer">S/. {{ showtime.price_seniors | number:'1.2-2' }}</span>
+                        </div>
+                    </li>
+                </ul>
+
+                <h3>Asientos</h3>
+                <ul class="selected-seats-list">
+                    <li *ngFor="let seat of selectedSeats" class="mb-2">
+                        <span>Asiento {{ seat.name }}</span>
+                        <div class="button-group">
+                            <label class="btn" [class.active]="seat.ticketType === 'general'">
+                                <input type="radio" name="seat{{seat.id}}" value="general" [(ngModel)]="seat.ticketType" (change)="updateSeatType(seat, 'general')">
+                                General
+                            </label>
+                            <label class="btn" [class.active]="seat.ticketType === 'kids'">
+                                <input type="radio" name="seat{{seat.id}}" value="kids" [(ngModel)]="seat.ticketType" (change)="updateSeatType(seat, 'kids')">
+                                Niños
+                            </label>
+                            <label class="btn" [class.active]="seat.ticketType === 'seniors'">
+                                <input type="radio" name="seat{{seat.id}}" value="seniors" [(ngModel)]="seat.ticketType" (change)="updateSeatType(seat, 'seniors')">
+                                Adultos Mayores
+                            </label>
+                        </div>
+                    </li> 
+                </ul>
+
+                <!-- Botón para ir a pagar -->
+                <div class="d-flex justify-content-end mt-3">
+                    <button class="btn btn-primary" [disabled]="!allSeatsSelected()" (click)="goPayment()">Ir a Pagar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,226 @@
+<div class="container mt-4" *ngIf="showtime && tickets.length">
+    <div class="content-wrapper row">
+        <!-- Información del Showtime -->
+        <p class="showtime-id"><strong>Showtime ID: {{ showtime.id }}  - Purchase ID: {{ purchase.id }}</strong> </p> 
+        <div class="col-md-4 showtime-info" *ngIf="movie">
+            <img [src]="movie.poster" class="img-fluid" alt="{{ movie.title }}">
+            <div class="showtime-info-text">
+                <h1><strong>{{ movie.title }}</strong> </h1>
+                <h2><strong>Sala  {{ showtime.hall }}</strong> </h2>
+                <p><strong>{{ showtime.show_date | date:'EEEE, d MMMM' }}</strong> </p>
+                <p><strong>Hora: {{ formatTime(showtime.show_time) }}</strong> </p>
+                <p><strong>Duración:</strong> {{ formatDuration(movie.duration_mins) }}</p>
+            </div>
+
+            <div class="tickets-info col-md-4">
+                <p><strong>Tickets: {{  tickets.length }}</strong> </p>
+            </div>
+
+            <div class="total-price">
+                <h3>Total:</h3>
+                <p class="total-amount">S/. {{ amount | number:'1.2-2' }}</p>
+            </div>
+
+            <button class="btn btn-info" (click)="toggleSummary()">Resumen de Compra</button>
+
+        </div>
+
+        <!-- Columna derecha -->
+        <div class="col-md-8">
+            
+            <!-- Resumen de Compra -->
+            <div class="summary" *ngIf="showSummary">
+                <div class="summary-header">
+                    <h3>Resumen de Compra N°{{ purchase.id }}</h3>
+                    <button class="btn btn-secondary" (click)="toggleSummary()">Cerrar</button>
+                </div>
+                
+                <div class="summary-section">
+                    <div class="section-item">
+                        <h4>Asientos Seleccionados:</h4>
+                        <p><strong>{{ getSelectedSeatNames() }}</strong></p>
+                        <p class="summary-cant">Cant. {{ selectedSeats.length }}</p>
+                    </div>
+                    
+                    <div class="section-item">
+                        <h4>Entradas:</h4>
+                        <div class="ticket-summary">
+                            <div class="ticket-row header">
+                                <div class="ticket-id">Ticket N°</div>
+                                <div class="ticket-seat">Asiento</div>
+                                <div class="ticket-type">Tipo</div>
+                                <div class="ticket-price">Precio</div>
+                            </div>
+                            <div *ngFor="let ticket of tickets" class="ticket-row">
+                                <div class="ticket-id">{{ ticket.id }}</div>
+                                <div class="ticket-seat">{{ getSeatName(ticket) }}</div>
+                                <div class="ticket-type">{{ getTicketType(ticket) }}</div>
+                                <div class="ticket-price">S/ {{ ticket.price | number:'1.2-2' }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-total-price">
+                    <h3>Precio Total: S/ {{ amount | number:'1.2-2' }}</h3>
+                </div>
+            </div>
+
+            <!-- Formulario de Pago -->
+            <div class="payment" *ngIf="!showSummary">
+                <h3>Elige una forma de pago</h3>
+                <form (ngSubmit)="onSubmit()" #paymentForm="ngForm">
+                    <div class="form-group">
+                        <label for="fullName">Nombre Completo</label>
+                        <input type="text" class="form-control" id="fullName" required [(ngModel)]="user.fullName" name="fullName" #fullName="ngModel">
+                        <div *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)" class="error-message">
+                            <div *ngIf="fullName.errors?.['required']">Este campo es obligatorio.</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" class="form-control" id="email" required [(ngModel)]="user.email" name="email" #email="ngModel">
+                        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-message">
+                            <div *ngIf="email.errors?.['required']">Este campo es obligatorio.</div>
+                            <div *ngIf="email.errors?.['email']">El formato del correo es incorrecto.</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="paymentMethod">Método de Pago</label>
+                        <select class="form-control" id="paymentMethod" required [(ngModel)]="paymentMethod" name="paymentMethod" (change)="onPaymentMethodChange($event)" #paymentMethodSelect="ngModel">
+                            <option value="creditCard">Tarjeta de Crédito o Débito</option>
+                            <option value="wallet">Billetera Electrónica</option>
+                        </select>
+                        <div *ngIf="paymentMethodSelect.invalid && (paymentMethodSelect.dirty || paymentMethodSelect.touched)" class="error-message">
+                            <div *ngIf="paymentMethodSelect.errors?.['required']">Este campo es obligatorio.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Detalles de la Tarjeta de Crédito -->
+                    <div *ngIf="paymentMethod === 'creditCard'">
+                        <h4>Tarjeta de Crédito o Débito</h4>
+                        <div class="form-group">
+                            <label for="cardType" class="form-label">Tipo de Tarjeta</label>
+                            <select class="form-control" id="cardType" required [(ngModel)]="creditCard.type" name="cardType" #cardType="ngModel">
+                                <option value="yape">Tarjeta de Crédito</option>
+                                <option value="plin">Tarjeta de Débito</option>
+                            </select>
+                            <div *ngIf="cardType.invalid || (cardType.dirty || cardType.touched)" class="error-message">
+                                <div *ngIf="cardType.errors?.['required']">Este campo es obligatorio.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cardNumber" class="form-label">Número de la tarjeta</label>
+                            <input type="text" class="form-control" id="cardNumber" required [(ngModel)]="creditCard.number" name="cardNumber" #cardNumber="ngModel">
+                            <div *ngIf="cardNumber.invalid || (cardNumber.dirty || cardNumber.touched)" class="error-message">
+                                <div *ngIf="cardNumber.errors?.['required']">Este campo es obligatorio.</div>
+                                <div *ngIf="isCardNumberInvalid()">Número de tarjeta inválido.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cardExpiryMonth" class="form-label">Mes</label>
+                            <select class="form-control" id="cardExpiryMonth" required [(ngModel)]="creditCard.expiryMonth" name="cardExpiryMonth" #cardExpiryMonth="ngModel">
+                                <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+                            </select>
+                            <div *ngIf="cardExpiryMonth.invalid || (cardExpiryMonth.dirty || cardExpiryMonth.touched)" class="error-message">
+                                <div *ngIf="cardExpiryMonth.errors?.['required']">Este campo es obligatorio.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cardExpiryYear" class="form-label">Año</label>
+                            <select class="form-control" id="cardExpiryYear" required [(ngModel)]="creditCard.expiryYear" name="cardExpiryYear" #cardExpiryYear="ngModel">
+                                <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+                            </select>
+                            <div *ngIf="cardExpiryYear.invalid || (cardExpiryYear.dirty || cardExpiryYear.touched)" class="error-message">
+                                <div *ngIf="cardExpiryYear.errors?.['required']">Este campo es obligatorio.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cardCVC" class="form-label">CVC</label>
+                            <input type="text" class="form-control" id="cardCVC" required [(ngModel)]="creditCard.cvc" name="cardCVC" #cardCVC="ngModel">
+                            <div *ngIf="cardCVC.invalid || (cardCVC.dirty || cardCVC.touched)" class="error-message">
+                                <div *ngIf="cardCVC.errors?.['required']">Este campo es obligatorio.</div>
+                                <div *ngIf="isCvcInvalid()">CVC debe tener 3 o 4 digitos.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="docType" class="form-label">Tipo de documento</label>
+                            <select class="form-control" id="docType" required [(ngModel)]="creditCard.docType" name="docType" (change)="onDocTypeChange($event)" #docType="ngModel">
+                                <option *ngFor="let docType of documentTypes" [value]="docType">{{ docType }}</option>
+                            </select>
+                            <div *ngIf="docType.invalid || (docType.dirty || docType.touched)" class="error-message">
+                                <div *ngIf="docType.errors?.['required']">Este campo es obligatorio.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="docNumber" class="form-label">Número de documento</label>
+                            <input type="text" class="form-control" id="docNumber" required [(ngModel)]="creditCard.docNumber" name="docNumber" [ngClass]="{'invalid': isDocNumberInvalid()}" #docNumber="ngModel">
+                            <div *ngIf="docNumber.invalid || (docNumber.dirty || docNumber.touched)" class="error-message">
+                                <div *ngIf="docNumber.errors?.['required']">Este campo es obligatorio.</div>
+                                <div *ngIf="isDocNumberInvalid()">Número de documento inválido para el tipo seleccionado.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detalles de la Billetera Electrónica -->
+                    <div *ngIf="paymentMethod === 'wallet'">
+                        <h4>Billeteras Electrónicas</h4>
+                        <div class="form-group">
+                            <label for="walletDocType" class="form-label">Tipo de documento</label>
+                            <select class="form-control" id="walletDocType" required [(ngModel)]="wallet.docType" name="walletDocType" (change)="onWalletDocTypeChange($event)" #walletDocType="ngModel">
+                                <option *ngFor="let docType of documentTypes" [value]="docType">{{ docType }}</option>
+                            </select>
+                            <div *ngIf="walletDocType.invalid || (walletDocType.dirty || walletDocType.touched)" class="error-message">
+                                <div *ngIf="walletDocType.errors?.['required']">Este campo es obligatorio.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="walletDocNumber" class="form-label">Número de documento</label>
+                            <input type="text" class="form-control" id="walletDocNumber" required [(ngModel)]="wallet.docNumber" name="walletDocNumber" [ngClass]="{'invalid': isWalletDocNumberInvalid()}" #walletDocNumber="ngModel">
+                            <div *ngIf="walletDocNumber.invalid || (walletDocNumber.dirty || walletDocNumber.touched)" class="error-message">
+                                <div *ngIf="walletDocNumber.errors?.['required']">Este campo es obligatorio.</div>
+                                <div *ngIf="isWalletDocNumberInvalid()">Número de documento inválido para el tipo seleccionado.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="walletPhoneNumber" class="form-label">Número de Celular</label>
+                            <input type="text" class="form-control" id="walletPhoneNumber" required [(ngModel)]="wallet.phoneNumber" name="walletPhoneNumber" #walletPhoneNumber="ngModel">
+                            <div *ngIf="walletPhoneNumber.invalid || (walletPhoneNumber.dirty || walletPhoneNumber.touched)" class="error-message">
+                                <div *ngIf="walletPhoneNumber.errors?.['required']">Este campo es obligatorio.</div>
+                                <div *ngIf="isPhoneNumberInvalid()">Número de celular inválido.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="walletProvider" class="form-label">Elige alguna de las opciones de pago</label>
+                            <select class="form-control" id="walletProvider" required [(ngModel)]="wallet.provider" name="walletProvider" #walletProvider="ngModel">
+                                <option value="yape">Yape</option>
+                                <option value="plin">Plin</option>
+                                <option value="tunki">Tunki</option>
+                            </select>
+                            <div *ngIf="walletProvider.invalid || (walletProvider.dirty || walletProvider.touched)" class="error-message">
+                                <div *ngIf="walletProvider.errors?.['required']">Este campo es obligatorio.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="terms" required [(ngModel)]="acceptTerms" name="terms" #terms="ngModel">
+                        <label class="form-check-label" for="terms">
+                            Acepto los 
+                            <a href="assets/terms-and-conditions.pdf" target="_blank" class="terms-link">Términos y Condiciones</a>
+                            y
+                            <a href="assets/privacy-policy.pdf" target="_blank" class="terms-link">Políticas de Privacidad</a>
+                        </label>
+                        <div *ngIf="terms.invalid && (terms.dirty || terms.touched)" class="error-message">
+                            <div *ngIf="terms.errors?.['required']">Debes aceptar los términos y condiciones.</div>
+                        </div>
+                    </div>
+
+                    <!-- Botón de enviar -->
+                    <button type="submit" class="btn btn-primary" [disabled]="!paymentForm.form.valid">Pagar</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="profile-container">
+    <div class="profile-card" *ngIf="userProfile">
+        <h2>Perfil de Usuario</h2>
+        <div class="profile-item">
+            <span class="profile-label">ID Usuario:</span>
+            <span class="profile-value">{{ userProfile?.user }}</span>
+        </div>
+        <div class="profile-item">
+            <span class="profile-label">DNI:</span>
+            <span class="profile-value">{{ userProfile?.dni }}</span>
+        </div>
+        <div class="profile-item">
+            <span class="profile-label">Fecha de Nacimiento:</span>
+            <span class="profile-value">{{ userProfile?.birthdate }}</span>
+        </div>
+        <div class="profile-item">
+            <span class="profile-label">Teléfono:</span>
+            <span class="profile-value">{{ userProfile?.phone }}</span>
+        </div>
+        <div class="profile-item">
+            <span class="profile-label">Dirección:</span>
+            <span class="profile-value">{{ userProfile?.address }}</span>
+        </div>
+        <div class="profile-item">
+            <span class="profile-label">Estado Civil:</span>
+            <span class="profile-value">{{ userProfile?.civil_status }}</span>
+        </div>
+    </div>
+    <div class="purchases-card">
+        <h2>Compras</h2>
+        <div *ngFor="let purchase of purchases" class="purchase-item">
+            <span>N°{{ purchase.id }}</span>
+            <span>{{ purchase.purchase_date }}</span>
+            <span>{{ purchase.total_amount }}</span>
+            <div class="tickets">
+                <h5>Tickets:</h5>
+                <div *ngIf="tickets[purchase.id]">
+                    <ul>
+                    <li *ngFor="let ticket of tickets[purchase.id]">
+                        Ticket ID: {{ ticket.id }} - Tipo: {{ticket.ticket_type }} Asiento: {{ ticket.seat }} - Precio: ${{ ticket.price }}
+                    </li>
+                    </ul>
+                </div>
+                <div *ngIf="!tickets[purchase.id] || tickets[purchase.id].length === 0">
+                    No hay tickets para esta compra.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

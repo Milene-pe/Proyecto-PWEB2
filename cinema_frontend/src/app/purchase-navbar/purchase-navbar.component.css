@@ -1,0 +1,95 @@
+.navbar {
+    justify-content: center;
+    background-color: #0056b3;
+    position: relative;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.navbar-brand:hover {
+    cursor: pointer;
+    color: #bfbfbf;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    position: relative;
+}
+
+.navbar-message {
+    font-size: 1.2rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-item {
+    margin-left: 10px;
+}
+
+.nav-link {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white !important;
+}
+
+.btn {
+    font-size: 1.8rem;
+    line-height: 1;
+    padding: 0.5rem 1rem;
+    color: white;
+}
+
+.btn:hover {
+    color: #bfbfbf;
+}
+
+.btn:focus {
+    box-shadow: none;
+}
+
+.navbar-collapse {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-grow: 1;
+}
+
+@media (max-width: 767px) {
+    .navbar-nav {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .nav-item {
+        margin-left: 0;
+        margin-top: 0;
+    }
+
+    .btn {
+        width: auto;
+    }
+
+    .nav-item span.nav-link {
+        text-align: center;
+    }
+
+    .nav-item:last-child {
+        margin-left: auto;
+    }
+}

@@ -1,0 +1,230 @@
+.container.mt-4{
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.showtime-id {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px; /* Espacio entre la información y la sección de asientos */
+    background-color: #ebebeb;
+    border-left: #004991 15px solid;
+    border-radius: 20px;
+}
+
+.showtime-info {
+    top: 0;
+    flex: 1;
+    justify-content: right;
+    padding-bottom: 50px;
+}
+
+.showtime-info-text {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.showtime-info-text h1{
+    color: #004991;
+}
+
+.showtime-info img {
+    width: auto;
+    height: 500px;
+    border-radius: 15%; /* Esto hará que la imagen sea circular */
+    display: block; /* Asegura que la imagen se ajuste correctamente */
+    margin: 0 auto; /* Centra la imagen dentro del contenedor */
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.showtime-info p {
+    margin: 10px 0;
+}
+
+.tickets-info{
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.tickets-info p{
+    color: #004991;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.col-md-8{
+    border-left: #004991 5px solid;
+    padding-bottom: 50px;
+}
+
+.seats-section {
+    flex: 2; /* Ocupa el doble del espacio que la sección de información */
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.screen {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #004991;
+    border: #004991 5px solid;
+    border-radius: 40px;
+}
+
+.seats-container {
+    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.seat {
+    width: 50px;
+    height: 50px;
+    margin: 7px;
+    background-color: #d8d8d8;
+    border: #004991 2px solid;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.seat.available, .seat-available {
+    background-color: #d8d8d8; /* Verde para disponible */
+}
+
+.seat.selected, .seat-selected {
+    background-color: #004991; /* Azul para seleccionado */
+}
+
+.seat.occupied, .seat-occupied {
+    background-color: #dc3545; /* Rojo para ocupado */
+    border-color: #dc3545;
+    cursor: not-allowed;
+}
+
+/* Tooltip */
+.tooltip {
+    visibility: hidden;
+    width: 80px; /* Ajusta según el tamaño del texto */
+    height: 50px;
+    background-color: #555;
+    color: #fff;
+    font-size: 25px;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* Coloca el tooltip arriba del asiento */
+    left: 90%;
+    margin-left: -60px; /* Centra el tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.seat:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Estilos para la leyenda de los asientos */
+.seat-legend {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+}
+
+.legend-item .seat {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.legend-item p {
+    margin: 0;
+}
+
+.selected-seats {
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.selected-seats p {
+    font-weight: bold;
+    color: #004991;
+    font-size: 2em;
+}
+
+.selected-seats-list {
+    display: flex;
+    flex-wrap: wrap; /* Para manejar múltiples líneas si es necesario */
+    gap: 15px; /* Espacio entre los elementos */
+}
+
+.selected-seats-list span {
+    background-color: #004991; /* Color de fondo para los asientos seleccionados */
+    color: #fff; /* Color del texto */
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: rgb(0, 157, 0); /* Color de fondo del botón */
+    color: #fff; /* Color del texto del botón */
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+
+button:hover {
+    background-color: rgb(0, 105, 0); /* Color de fondo del botón en hover */
+}

@@ -1,0 +1,72 @@
+<div class="container mt-4" *ngIf="showtime && seats.length">
+    <div class="content-wrapper row">
+        <!-- Información del Showtime -->
+        <p class="showtime-id"><strong>Showtime ID: {{ showtime.id }}</strong> </p> 
+        <div class="col-md-4 showtime-info" *ngIf="movie">
+            <img [src]="movie.poster" class="img-fluid" alt="{{ movie.title }}">
+            <div class="showtime-info-text">
+                <h1><strong>{{ movie.title }}</strong> </h1>
+                <h2><strong>Sala  {{ showtime.hall }}</strong> </h2>
+                <p><strong>{{ showtime.show_date | date:'EEEE, d MMMM' }}</strong> </p>
+                <p><strong>Hora: {{ formatTime(showtime.show_time) }}</strong> </p>
+                <p><strong>Duración:</strong> {{ formatDuration(movie.duration_mins) }}</p>
+            </div>
+
+            <div class="tickets-info col-md-4">
+                <p><strong>Tickets: {{  getSelectedSeats().length }}</strong> </p>
+            </div>
+        </div>
+
+        <!-- Columna derecha con el escenario y los asientos -->
+        <div class="col-md-8">
+            <div class="seats-section">
+                <div class="screen">Pantalla</div>
+                <div class="seats-container">
+                    <div class="row" *ngFor="let row of seats">
+                        <div *ngFor="let seat of row" class="seat"
+                            [ngClass]="{
+                                'seat-occupied': !seat.is_available,
+                                'seat-selected': seat.selected && seat.is_available,
+                                'seat-available': seat.is_available && !seat.selected
+                            }"
+                            (click)="toggleSeat(seat)">
+                            <span class="tooltip">{{ seat.name }}</span>
+                            <!-- Representación visual del asiento -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leyenda de Asientos -->
+            <div class="seat-legend">
+                <div class="legend-item">
+                    <div class="seat available"></div>
+                    <p>Disponible</p>
+                </div>
+                <div class="legend-item">
+                    <div class="seat selected"></div>
+                    <p>Seleccionado</p>
+                </div>
+                <div class="legend-item">
+                    <div class="seat occupied"></div>
+                    <p>Ocupado</p>
+                </div>
+            </div>
+
+            <!-- Asientos seleccionados -->
+            <div class="selected-seats mt-3">
+                <p><strong>Asientos Seleccionados:</strong></p>
+                <div class="selected-seats-list">
+                    <span *ngFor="let seat of getSelectedSeats()">
+                        {{ seat.name }}
+                    </span>
+                </div>
+            </div>
+
+            <!-- Botón para iniciar la compra -->
+            <button (click)="initiatePurchase()" class="btn btn-primary mt-3">
+                Iniciar Compra
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+.profile-card,
+.purchases-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    width: 100%;
+    max-width: 400px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.profile-item,
+.purchase-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.profile-label {
+    font-weight: bold;
+    color: #555;
+}
+
+.profile-value {
+    color: #777;
+}
+
+.perfil-container {
+    padding: 20px;
+}
+
+.user-info {
+    margin-bottom: 20px;
+}
+
+.purchases {
+    margin-top: 20px;
+}
+
+.purchase-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.tickets {
+    margin-top: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+li {
+    margin-bottom: 5px;
+}
