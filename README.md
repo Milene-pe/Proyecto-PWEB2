@@ -63,3 +63,108 @@ Este es el backend del proyecto, desarrollado con Django. Incluye aplicaciones p
   - Vistas y URLs para la gestión de compras.
   - Serializadores para la API REST.
 
+
+## Configuración del Entorno
+
+### Requisitos Previos
+
+- **Node.js y npm**: Para ejecutar y gestionar el frontend.
+- **Angular CLI**: Para desarrollar y construir la aplicación Angular.
+- **Python y pip**: Para ejecutar y gestionar el backend.
+- **Django**: Framework de desarrollo web para el backend.
+- **Virtualenv**: Para crear un entorno virtual aislado en Python.
+
+### Instalación
+
+#### Frontend
+
+1. Navega al directorio `cinema_frontend`:
+
+    cd cinema_frontend
+    
+
+2. Instala las dependencias de Node.js:
+
+    npm install
+    
+
+3. Ejecuta el servidor de desarrollo:
+
+    ng serve
+    
+
+#### Backend
+
+1. Navega al directorio `cinema_proyect`:
+
+
+    cd cinema_proyect
+    
+
+2. Crea un entorno virtual:
+
+    virtualenv env
+
+
+3. Activa el entorno virtual:
+
+    - En Windows:
+
+        .\env\Scripts\activate
+
+    - En Unix o MacOS:
+
+        source env/bin/activate
+
+4. Instala las dependencias de Python:
+
+    pip install -r requirements.txt
+
+
+5. Realiza las migraciones de la base de datos:
+
+    python manage.py migrate
+
+
+6. Ejecuta el servidor de desarrollo:
+
+    python manage.py runserver
+
+
+## Ejecución del Proyecto
+
+### Frontend
+
+Para ejecutar el frontend, navega al directorio `cinema_frontend` y ejecuta:
+
+```sh
+cd cinema_frontend
+ng serve
+Esto iniciará el servidor de desarrollo de Angular y la aplicación estará disponible en http://localhost:4200.
+
+Backend
+Para ejecutar el backend, navega al directorio cinema_proyect y ejecuta:
+
+sh
+Copy code
+cd cinema_proyect
+python manage.py runserver
+Esto iniciará el servidor de desarrollo de Django y la aplicación estará disponible en http://localhost:8000.
+
+Funcionalidades
+- Gestión de Películas
+- Visualización de Películas: Los usuarios pueden ver una lista de todas las películas disponibles, incluyendo información detallada como título, descripción, género, duración y calificación.
+- Categorías de Películas: Las películas están organizadas en diferentes categorías como estreno, populares y recomendadas, facilitando la navegación y búsqueda.
+- Búsqueda de Películas: Funcionalidad de búsqueda para encontrar películas específicas por título o género.
+- Gestión de Entradas
+- Compra de Entradas: Los usuarios pueden seleccionar una película, elegir la sala y horario, y comprar entradas en línea.
+- Historial de Compras: Los usuarios pueden ver su historial de compras y detalles de sus tickets.
+- Validación de Tickets: Sistema para la validación de tickets en el cine, asegurando la autenticidad de las entradas.
+- Gestión de Usuarios
+- Registro y Autenticación: Sistema de registro y login para usuarios, asegurando que solo usuarios autenticados puedan realizar compras.
+- Perfil de Usuario: Cada usuario tiene un perfil donde puede ver y editar su información personal.
+- Recuperación de Contraseña: Funcionalidad para la recuperación de contraseñas olvidadas a través de correo electrónico.
+- Gestión de Salas
+- Administración de Salas: Los administradores pueden crear, editar y eliminar salas de cine.
+- Asignación de Películas a Salas: Las películas pueden ser asignadas a diferentes salas y horarios.
+- Capacidad de Salas: Gestión de la capacidad de cada sala, asegurando que no se vendan más entradas de las disponibles.
