@@ -3,8 +3,8 @@
 # FINAL PROYECT PWEB 2: Cineplanet Proyect
 
 ## Integrantes
-Pacheco Esquinarila Milene
-Salas Idme Nikole
+- Pacheco Esquinarila Milene  
+- Salas Idme Nikole
 
 ## 🚀 Descripción
 
