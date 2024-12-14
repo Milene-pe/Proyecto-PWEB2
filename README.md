@@ -16,7 +16,7 @@ Este proyecto es un sistema de gestión de cine que permite a los usuarios ver i
 - [Repositorio en GitHub](https://github.com/Milene-pe/Proyecto-PWEB2.git)
 
 ## 📌 Video de funcionamiento del proyecto
-
+- [Video de funcionamiento](https://youtu.be/irJxsKgJFvQ)
 
 ## 📌 Informe del Proyecto
 [Informe Final PWEB2](Informe%20Final%20PWEB2.pdf)
