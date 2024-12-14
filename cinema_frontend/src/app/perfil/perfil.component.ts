@@ -9,7 +9,7 @@ import { error } from 'console';
   styleUrl: './perfil.component.css'
 })
 export class PerfilComponent implements OnInit {
-  userProfile: any;
+  userProfile: any = null;
   purchases: any[] = [];
   tickets: { [key: number]: any[] } = {};
 
@@ -20,7 +20,7 @@ export class PerfilComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getUserProfile().subscribe(
       data => {
-        this.userProfile = data;
+        this.userProfile = data[0];
         console.log('User profile:', this.userProfile);
         this.getPurchases();
       },
@@ -31,8 +31,8 @@ export class PerfilComponent implements OnInit {
   }
 
   getPurchases(): void {
-    if (this.userProfile && this.userProfile.user) {
-      this.movieService.getPurchasesByUser(this.userProfile.user).subscribe(
+    if (this.userProfile && this.userProfile.user && this.userProfile.user.id) {
+      this.movieService.getPurchasesByUser(this.userProfile.user.id).subscribe(
         data => {
           this.purchases = data;
           console.log('Purchases:', this.purchases);

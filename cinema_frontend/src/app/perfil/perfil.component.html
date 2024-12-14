@@ -1,9 +1,25 @@
 <div class="profile-container">
-    <div class="profile-card" *ngIf="userProfile">
+    <div class="profile-card" *ngIf="userProfile && userProfile.user">
         <h2>Perfil de Usuario</h2>
         <div class="profile-item">
             <span class="profile-label">ID Usuario:</span>
-            <span class="profile-value">{{ userProfile?.user }}</span>
+            <span class="profile-value">{{ userProfile?.user?.id }}</span>
+        </div>
+        <div class="profile-item">
+            <span class="profile-label">Nombre de Usuario:</span>
+            <span class="profile-value">{{ userProfile?.user?.username }}</span>
+        </div>
+        <div class="profile-item">
+            <span class="profile-label">Correo:</span>
+            <span class="profile-value">{{ userProfile?.user?.email }}</span>
+        </div>
+        <div class="profile-item">
+            <span class="profile-label">Nombres:</span>
+            <span class="profile-value">{{ userProfile?.user?.first_name }}</span>
+        </div>
+        <div class="profile-item">
+            <span class="profile-label">Apellidos:</span>
+            <span class="profile-value">{{ userProfile?.user?.last_name }}</span>
         </div>
         <div class="profile-item">
             <span class="profile-label">DNI:</span>

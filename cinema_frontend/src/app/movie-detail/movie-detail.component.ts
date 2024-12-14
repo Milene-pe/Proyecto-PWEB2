@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MovieService } from '../movie.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { UserService } from '../user.service';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-movie-detail',
@@ -9,10 +12,13 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./movie-detail.component.css']
 })
 export class MovieDetailComponent implements OnInit {
+  isAuthenticated: boolean = false;
+  private subscription: Subscription = new Subscription();
+
   movie: any;
   showtimes: any[] = [];
 
-  constructor(private route: ActivatedRoute, private movieService: MovieService, private sanitizer: DomSanitizer) { }
+  constructor(private route: ActivatedRoute, private movieService: MovieService, private sanitizer: DomSanitizer, private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.getMovieDetails();
@@ -27,6 +33,12 @@ export class MovieDetailComponent implements OnInit {
         }, 300); // Delay to ensure content is loaded
       }
     });
+
+    this.subscription.add(
+      this.userService.isAuthenticated$.subscribe(isAuthenticated => {
+        this.isAuthenticated = isAuthenticated;
+      })
+    );
   }
 
   getMovieDetails(): void {
@@ -76,4 +88,13 @@ export class MovieDetailComponent implements OnInit {
     }
     return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${videoId}`);
   }
+
+  buyTicket(showtimeId: number): void {
+    if (!this.isAuthenticated) {
+        alert('Por favor, inicie sesión para comprar tickets.'); // O muestra un mensaje en tu interfaz
+    } else {
+        // Si está autenticado, redirige a la página de asientos
+        this.router.navigate(['/', showtimeId, 'asientos']);
+    }
+}
 }

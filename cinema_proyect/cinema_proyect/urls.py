@@ -20,7 +20,7 @@ from rest_framework import routers
 from django.conf.urls.static import static
 from django.conf import settings
 from movies.views import MovieViewSet
-from users.views import get_user_profile
+from users.views import get_user_profile, UserProfileViewSet
 from halls.views import HallViewSet, ShowtimeViewSet, SeatViewSet
 from tickets.views import TicketViewSet
 from purchases.views import PurchaseViewSet
@@ -34,6 +34,7 @@ router.register(r'showtime', ShowtimeViewSet)
 router.register(r'seat', SeatViewSet)
 router.register(r'ticket', TicketViewSet)
 router.register(r'purchase', PurchaseViewSet)
+router.register(r'user', UserProfileViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

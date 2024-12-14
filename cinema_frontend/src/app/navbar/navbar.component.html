@@ -11,11 +11,14 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/peliculas" routerLinkActive="active" aria-current="page">Cartelera</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!isSuperUser">
           <a class="nav-link" routerLink="/estrenos" routerLinkActive="active">Estrenos</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!isSuperUser">
           <a class="nav-link" routerLink="/contacto" routerLinkActive="active">Contacto</a>
+        </li>
+        <li class="nav-item" *ngIf="isSuperUser && isAuthenticated">
+          <a class="nav-link" routerLink="/home" routerLinkActive="active" aria-current="page">Hello SuperUser</a>
         </li>
         <li class="nav-item" *ngIf="!isAuthenticated">
           <a class="nav-link" routerLink="/login" routerLinkActive="active">Iniciar Sesión</a>

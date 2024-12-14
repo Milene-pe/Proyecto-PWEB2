@@ -56,7 +56,11 @@
                 <div class="showtime-right">
                     <span class="showtime-hall">Sala: {{ showtime.hall }}</span>
                     <span class="showtime-seats">Asientos Disponibles: {{ showtime.available_seats || 0 }}</span>
-                    <a [routerLink]="['/', showtime.id, 'asientos']" class="btn btn-primary buy-ticket-button">Comprar Ticket</a>
+                    <button 
+                    (click)="buyTicket(showtime.id)" 
+                    class="btn btn-primary buy-ticket-button">
+                    Comprar Ticket
+                </button>
                 </div>
             </li>
         </ul>

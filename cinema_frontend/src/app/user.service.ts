@@ -80,5 +80,11 @@ export class UserService {
       observer.complete();
     });
   }
+
+  getAllUsers(): Observable<any> {
+    return this.http.get(this.userProfileUrl, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
+  }
 }
 

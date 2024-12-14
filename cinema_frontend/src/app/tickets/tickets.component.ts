@@ -38,7 +38,7 @@ export class TicketsComponent implements OnInit{
 
     this.userService.getUserProfile().subscribe(
       data => {
-        this.currentUser = data;
+        this.currentUser = data[0];
         console.log('User profile:', this.currentUser);
       },
       error => {
@@ -64,7 +64,7 @@ export class TicketsComponent implements OnInit{
       return {
         ticket_type: seat.ticketType || null,
         price: price ? price.toFixed(2) : null,
-        user: this.currentUser.user,
+        user: this.currentUser.user.id,
         purchase: this.purchase.id,
         showtime: this.showtime.id,
         seat: seat.id,
